@@ -14,18 +14,13 @@ def sort_matrix(matrix, x, row_len):
         else:
             i += 1
 
-
-# def sort_list(user_set, target_set):
-#
-#     return target_set
-
 def merge(movie_set, begin, mid, end, sorted_set, is_uno):
     n = begin
     m = mid
     inversions = 0
 
     while n < end:
-        if begin < mid and (m >= end or ((is_uno and movie_set[begin] < movie_set[m]) or (not is_uno and movie_set[begin][1] < movie_set[m][1] ))):
+        if begin < mid and (m >= end or ((is_uno and movie_set[begin] <= movie_set[m]) or(not is_uno and movie_set[begin][1] <= movie_set[m][1] ))):
             sorted_set[n] = movie_set[begin]
             begin += 1
         else:
@@ -59,6 +54,15 @@ def count_inversions(data, x):
         i += 1
 
     merge_sort(inversions.copy(), 0, len(inversions), inversions, False)
+    # i = 1
+    # while i < len(inversions):
+    #     temp = inversions[i]
+    #     j = i
+    #     while j > 0 and inversions[j - 1][1] > temp[1]:
+    #         inversions[j] = inversions[j - 1]
+    #         j -= 1
+    #     inversions[j] = temp
+    #     i += 1
 
     return inversions
 
@@ -67,3 +71,9 @@ print(count_inversions([[3, 2, 10, 6, 9, 1, 5, 7, 4, 8],
   [2, 4, 9, 6, 10, 7, 5, 1, 3, 8],
   [3, 9, 10, 6, 7, 4, 1, 2, 5, 8],
   [7, 3, 8, 6, 5, 4, 10, 1, 2, 9]],1))
+
+print(count_inversions([[1,2,3,4,5,6,7,8,9,10],
+                        [1,2,3,4,5,6,7,8,9,10],
+                        [1,2,3,4,5,6,7,8,9,10],
+                        [1,2,3,4,5,6,7,8,9,10],
+                        [1,2,3,4,5,6,7,8,9,10]],0))
